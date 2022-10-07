@@ -1,0 +1,24 @@
+{{!-- Layout --}}
+{{!< default}}
+
+{{!-- Last 5 featured articles slider - ./partials/home/featured-slider.hbs --}}
+{{#match @custom.publication_cover "Featured Slider"}}{{> "home/featured-slider"}}{{/match}}
+
+<div class="site-post container mx-auto py-vmin8">
+    <div class="js-feed-entry max-w-1100 mx-auto grid md:grid-cols-2 lg:grid-cols-12 gap-6">
+    {{#get "posts" filter="tags:-hash-zh"}}
+        {{#foreach posts}}
+            {{#has number="6"}}
+                {{> "story/story-grid" story_class="ss1 grid lg:col-span-full lg:grid-cols-3 gap-6"}}
+            {{else has number="4,5"}}
+                {{> "story/story-grid" story_class="ss2 lg:col-span-6"}}
+            {{else}}
+                {{> "story/story-grid" story_class="lg:col-span-4"}}
+            {{/has}}
+        {{/foreach}}
+    {{/get}}
+    </div>
+
+    {{!-- Pagination - partials/pagination.hbs --}}
+    {{pagination}}
+</div>

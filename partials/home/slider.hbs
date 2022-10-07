@@ -1,0 +1,57 @@
+{{#get "posts" filter="{{tag_filter}}" limit="5" include="authors,tags" as |featured|}}
+{{#if posts}}
+<div class="container mx-auto">
+    <div class="slider-area relative mt-10  md:mt-18">
+        <div class="slider-wrapper owl-carousel">
+            {{#foreach featured visibility="all"}}
+                <div class="flex justify-between bg-gray-200 flex-col lg:flex-row h-full">
+                    {{#if feature_image}}
+                    <a href="{{url}}" class="slider-image block w-full max-w-[100%] lg:max-w-[50%] xl:max-w-[60%]">
+                        <img class=""
+                            src="{{feature_image}}"
+                            alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+                        />
+                    </a>
+                    {{/if}}
+                    <div class="slider-content flex-1 p-6 md:p-10 ">
+                        {{#primary_tag}}
+                            <a class="block text-[14px] uppercase mb-4 md:mb-6 hover:underline dark-text-white" href="{{url}}">{{name}}</a>
+                        {{/primary_tag}}
+                        <h2 class="story-title text-2xl md:text-3xl font-sans text-title leading-tight mb-4 "><a href="{{url}}" class="block">{{title}}</a></h2>
+                        {{#primary_author}}
+                        <div class="author flex items-center gap-2 mb-3">
+                            <a href="{{url}}" title="{{t "Go to the profile of"}} {{name}}">
+                                <img class="object-cover rounded-full h-9 w-9"
+                                    src="{{#if profile_image}}{{img_url profile_image size="xs"}}{{else}}{{asset "images/avatar.png"}}{{/if}}"
+                                    alt="{{t "Go to the profile of "}} {{name}}"
+                                    width="36"
+                                    height="36"
+                                />
+                            </a>
+                            <a class="dark-text-white" href="{{url}}">{{name}}</a>
+                        </div>
+                        {{/primary_author}}
+                        <p  class="block line-clamp-3 story-excerpt mb-5 text-lg leading-normal text-gray-500 dark-text-white">
+                            {{#if custom_excerpt}}
+                                {{custom_excerpt}}
+                            {{else}}
+                                {{excerpt words="20"}}
+                            {{/if}}
+                        </p>
+                    </div>
+                </div>
+            {{/foreach}}
+            
+        </div>
+        <div class="navigation hidden lg:flex items-center gap-4 justify-between bg-gray-300 px-3 py-2">
+            <div class="customNextBtn">
+                <svg class="h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25"><title>Artboard-35</title><g id="Left-2" data-name="Left"><polygon points="24 12.001 2.914 12.001 8.208 6.706 7.501 5.999 1 12.501 7.5 19.001 8.207 18.294 2.914 13.001 24 13.001 24 12.001" style="fill:#232326"/></g></svg>
+            </div>
+            <div class="customPrevBtn">
+                <svg class="h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25"><title>Artboard-34</title><g id="Right-2" data-name="Right"><polygon points="17.5 5.999 16.793 6.706 22.086 11.999 1 11.999 1 12.999 22.086 12.999 16.792 18.294 17.499 19.001 24 12.499 17.5 5.999" style="fill:#232326"/></g></svg>
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}}
+{{/get}}

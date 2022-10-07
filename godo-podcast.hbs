@@ -1,0 +1,29 @@
+{{!-- Layout --}}
+{{!< default}}
+
+{{!-- custom Styles For tag <body> --}}
+{{#contentFor "special_body_class"}}is-podcast has-cover is-head-transparent{{/contentFor}}
+
+{{#page}}
+
+<div class="spc-header simply-hero-cover flex items-center justify-center relative min-h-lg py-24 px-4 bg-dark overflow-hidden">
+
+    <article class="spc-h-inner max-w-4xl relative flex flex-col text-center z-3 pt-16 text-white text-2xl md:text-3xl animated bounceIn">
+        <h1 class="spc-h-t text-white text-5xl md:text-6xl">{{title}}</h1>
+        {{content}}
+    </article>
+
+    {{!-- Featured Media - partials/components/media-cover.hbs --}}
+    {{> "components/media-cover" background=feature_image has_gradient=true alt_title=title}}
+</div>
+
+{{/page}}
+
+<div class="py-12 px-4 mx-auto max-w-4xl">
+    <div class="js-feed-entry">
+        {{#foreach posts}} {{>"story/story-podcast"}} {{/foreach}}
+    </div>
+
+    {{!-- Pagination - partials/pagination.hbs --}}
+    {{pagination}}
+</div>

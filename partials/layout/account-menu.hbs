@@ -1,0 +1,67 @@
+{{#if @member}}
+{{!-- Button Updgrade --}}
+{{!-- {{#unless @member.paid}}<a class="button mr-2 text-sm font-medium hidden md:flex" href="{{@site.url}}/membership/">{{t "Upgrade"}}</a>{{/unless}} --}}
+{{#unless @member.paid}}<a data-portal="account/plans" class="button is-black mr-2 text-sm font-medium hidden md:flex" href="#">{{t "Upgrade"}}</a>{{/unless}}
+
+<div class="dropdown is-right h-16 flex items-center md:ml-3">
+    {{!-- https://ghost.org/docs/members/member-data/ --}}
+    <a href="javascript:" aria-label="Toggle Account" class="dropdown-trigger relative w-8 h-8 inline-block overflow-hidden rounded-full" id="account-menu">
+        <span class="absolute inset-0 text-gray-400">{{> "icons/avatar"}}</span>
+        {{#if @member.avatar_image}}<img class="inset-image" alt="" width="32" height="32" src="{{@member.avatar_image}}"/>{{/if}}
+    </a>
+
+    <div class="dropdown-menu" role="menu">
+        <ul class="dropdown-content">
+            <li class="py-2 px-5">
+                <div class="flex items-center">
+                    <div class="flex-none relative overflow-hidden rounded-full h-12 w-12">
+                        <span class="absolute inset-0 text-gray-400">{{> "icons/avatar"}}</span>
+                        {{#if @member.avatar_image}}<img class="inset-image" width="48" height="48" alt="" src="{{@member.avatar_image}}"/>{{/if}}
+                    </div>
+
+                    <div class="account-info flex-1 pl-2 overflow-hidden leading-tight">
+                        <div class="font-medium text-base whitespace-nowrap text-ellipsis overflow-hidden pb-1">
+                            {{#if @member.name}}
+                            {{!-- <a href="{{@site.url}}/account/" class="hover:text-gray-700">{{@member.name}}</a> --}}
+                            <a data-portal="account" href="#" class="hover:text-gray-700">{{@member.name}}</a>
+                            {{else}}
+                            <span>{{signedinas}}</span>
+                            {{/if}}
+                        </div>
+
+                        <div class="text-sm whitespace-nowrap text-ellipsis overflow-hidden">
+                            {{!-- <a href="{{@site.url}}/account/" class="text-gray-500 hover:underline" title="{{@member.email}}">{{@member.email}}</a> --}}
+                            <a data-portal="account" href="#" class="text-gray-500 hover:underline" title="{{@member.email}}">{{@member.email}}</a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="dropdown-divider border-t my-3"></li>
+            {{!-- Link to user account --}}
+            <li class="px-5">
+                {{!-- <a href="{{@site.url}}/account/" class="pl-2 button is-white w-full justify-start"> --}}
+                <a data-portal="account" href="#" class="pl-2 button is-white w-full justify-start">
+                    {{> "icons/person"}}
+                    <span>{{account}}</span>
+                </a>
+            </li>
+            {{!-- Sign out --}}
+            <li class="px-5">
+                <a href="#signout" class="pl-2 button is-white w-full justify-start" data-members-signout>
+                    {{> "icons/logout"}}
+                    <span>{{logout}}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+{{else}}
+
+{{!-- <a class="button is-white mr-2 text-sm font-medium hidden md:flex" href="{{@site.url}}/signin/">{{t "Log in"}}</a> --}}
+<a data-portal="signin" class="button is-white mr-2 text-sm font-medium hidden md:flex" href="#/portal/signin">{{login}}</a>
+{{!-- <a class="button is-primary text-sm font-medium hidden md:flex" href="{{@site.url}}/membership/">{{t "Subscribe"}}</a> --}}
+<a data-portal="signup" class="button is-primary text-sm font-medium hidden md:flex" href="#/portal/signup">{{subscribe}}</a>
+
+{{/if}}

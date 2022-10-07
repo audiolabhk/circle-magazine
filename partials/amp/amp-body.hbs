@@ -1,0 +1,77 @@
+<article class="article pt-8">
+    <header class="article-header container">
+        {{#if primary_tag}}{{#primary_tag}}
+            <div class="categories mb-3 tracking-wider text-sm font-medium"><a href="{{url}}" title="{{name}}" class="uppercase text-gray-500">{{name}}</a></div>
+        {{/primary_tag}}{{/if}}
+
+        <h1 class="article-title m-0 mb-5">{{title}}</h1>
+        {{#if custom_excerpt}}<p class="article-excerpt text-gray-500 text-lg m-0 mb-5">{{custom_excerpt}}</p>{{/if}}
+
+        <div class="flex items-center overflow-hidden">
+            {{#primary_author}}
+            <div class="flex-none mr-3">
+                <a href="{{url}}" title="{{t "Go to the profile of"}} {{name}}">
+                    <amp-img class="object-cover rounded-full"
+                        src="{{#if profile_image}} {{img_url profile_image absolute="true" size="xs"}} {{else}} {{asset "images/avatar.png" absolute="true"}} {{/if}}"
+                        width="36"
+                        height="36"
+                        alt="{{name}}">
+                    </amp-img>
+                </a>
+            </div>
+
+            <div class="flex-auto">
+                <div class="text-sm font-medium"><a href="{{url}}" class="text-gray-800">{{name}}</a></div>
+            {{/primary_author}}
+                <div class="flex items-center text-gray-500 text-sm">
+                    <time class="capitalize" datetime="{{date format="YYYY-MM-DD"}}">{{date format="D MMM YYYY"}}</time>
+                    <span class="mx-1">·</span>
+                    <span title="{{reading_time seconds=(t "< 1 min read") minute=(t "1 min read") minutes=(t "% min read")}}">{{reading_time seconds=(t "< 1 min read") minute=(t "1 min read") minutes=(t "% min read")}}</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    {{#if feature_image}}
+    <figure class="article-image pt-8">
+        <amp-img src="{{img_url feature_image size="m" absolute="true"}}" width="600" height="350" layout="responsive" alt="{{title}}"></amp-img>
+    </figure>
+    {{/if}}
+
+    {{!-- article body (all content) --}}
+    <div class="article-body container"> {{amp_content}} </div>
+
+    {{!-- Post All Tags (category) --}}
+    {{#if tags}}
+    <div class="article-tags container mt-8">
+        {{#foreach tags}}<a href="{{url absolute="true"}}" title="{{name}}" class="button-tags capitalize font-medium text-sm">{{name}}</a>{{/foreach}}
+    </div>
+    {{/if}}
+
+    {{!-- Share social Media --}}
+    <footer class="share container mt-8">
+        <div class="share-title block text-gray-500 text-sm mb-3">{{t "Share"}}:</div>
+        <amp-social-share class="rounded"
+        type="email"
+        width="36"
+        height="36"></amp-social-share>
+        <amp-social-share class="rounded"
+        type="facebook"
+        data-param-app_id="254325784911610"
+        width="36"
+        height="36"></amp-social-share>
+        <amp-social-share class="rounded"
+        type="twitter"
+        width="36"
+        height="36"></amp-social-share>
+        <amp-social-share class="rounded"
+        type="linkedin"
+        width="36"
+        height="36"></amp-social-share>
+        <amp-social-share class="rounded"
+        type="whatsapp"
+        width="36"
+        height="36"></amp-social-share>
+    </footer>
+
+</article>

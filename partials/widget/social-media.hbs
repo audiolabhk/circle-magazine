@@ -1,0 +1,44 @@
+<div class="js-social-media social-media{{#if class}} {{class}}{{/if}}">
+    {{#if @site.facebook}}
+    <a class="godo-tracking p-2 inline-block hover:opacity-70"
+        data-event-category="Header"
+        data-event-action="Social"
+        data-event-label="Facebook"
+        data-event-non-interaction="true"
+        title="Facebook {{@site.facebook}}"
+        aria-label="Facebook {{@site.facebook}}"
+        href="{{facebook_url}}"
+        target="_blank"
+        rel="noopener noreferrer">
+        <svg class="icon icon--facebook"><use xlink:href="#icon-facebook"></use></svg>
+    </a>
+    {{/if}}
+
+    {{#if @custom.instagram_url}}
+    {{!-- <a class="godo-tracking p-2 inline-block hover:opacity-70"
+        data-event-category="Header"
+        data-event-action="Social"
+        data-event-label="Twitter"
+        data-event-non-interaction="true"
+        title="Twitter {{@site.twitter}}"
+        aria-label="Twitter {{@site.twitter}}"
+        href="{{twitter_url}}"
+        target="_blank"
+        rel="noopener noreferrer">
+        <svg class="icon icon--twitter"><use xlink:href="#icon-twitter"></use></svg>
+    </a> --}}
+    <a class="godo-tracking p-2 inline-block hover:opacity-70"
+        data-event-category="Header"
+        data-event-action="Social"
+        data-event-label="Instagram"
+        data-event-non-interaction="true"
+        title="instagram"
+        aria-label="instagram"
+        href="{{@custom.instagram_url}}"
+        target="_blank"
+        rel="noopener noreferrer">
+        <svg class="icon icon--instagram"><use xlink:href="#icon-instagram"></use></svg>
+    </a>
+    {{/if}}
+
+</div>

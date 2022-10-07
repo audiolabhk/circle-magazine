@@ -1,0 +1,73 @@
+{{!-- Layout --}}
+{{!< default-zh}}
+
+{{!-- slider - partials/home/slider.hbs --}}
+{{> "home/slider" tag_filter="tag:hash-zh+featured:true"}}
+{{!-- Feed Stories --}}
+<div class="site-post container mx-auto py-vmin8">
+    <div class="flex sm:items-center sm:justify-between gap-5 mb-8 flex-col sm:flex-row">
+        <h3 class="text-title">最新的帖子</h3>
+    </div>
+    <div class="post-wrapper grid md:grid-cols-2 lg:grid-cols-12 gap-6 pb-8 lg:pb-12 border-color">
+        {{#get "posts" filter="tags:-[{{@custom.homepage_chinese_categories_slug}}]+tag:hash-zh" include="tags,authors" limit="2"}}
+            {{#if posts}}
+                <div class="js-feed-entry col-span-12 lg:col-span-8 xl:col-span-9">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                        {{#foreach posts}}
+                            {{> "story/story-grid"}}
+                        {{/foreach}}
+                    </div>
+                </div>
+            {{/if}}
+        {{/get}}
+        {{#if @custom.banner_for_chinese}}
+        <div class="col-span-12 lg:col-span-4 xl:col-span-3 offers">
+            <div class="lg:block grid lg:grid-cols-12 sm:grid-cols-2 gap-8">
+                <a href="{{@custom.url_for_chinese_banner}}" class="w-full mb-4 block">
+                    <img class="w-full" src="{{@custom.banner_for_chinese}}" alt="offer">
+                </a>
+            </div>
+        </div>
+        {{/if}}
+    </div>
+    {{#get "posts" filter="tags:-[{{@custom.homepage_chinese_categories_slug}}]+tag:hash-zh" include="tags,authors" limit="5"}}
+        {{#if posts}}
+            <div class="py-8 lg:py-12">
+                <div class="post-wrap-div">
+                    <div class="js-feed-entry grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {{#foreach posts from="3"}}
+                            {{> "story/story-grid"}}
+                        {{/foreach}}
+                    </div>
+                </div>
+            </div>
+        {{/if}}
+    {{/get}}
+    {{#if @custom.homepage_chinese_categories_slug}}
+    {{#get "tags" filter="slug:[{{@custom.homepage_chinese_categories_slug}}]" order="published_at desc"}}
+        {{#if tags}}
+            {{#foreach tags}}
+                <div class="py-8 lg:py-12 border-color-top">
+                    <div class="flex sm:items-center sm:justify-between gap-5 mb-8 flex-col sm:flex-row">
+                        <h3 class="text-title"><a href="{{url}}">{{name}}</a></h3>
+                    </div>
+                    <div class="post-wrap-div">
+                        {{#get "posts" filter="tag:{{slug}}+featured:false" include="tags,authors" limit="3"}}
+                            {{#if posts}}
+                                <div class="js-feed-entry grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                    {{#foreach posts}}
+                                        {{> "story/story-grid"}}
+                                    {{/foreach}}
+                                </div>
+                            {{/if}}
+                        {{/get}}
+                        <a class="see-more hidden sm:flex hover:underline font-medium dark-text-white items-center justify-end gap-2 mt-6" href="{{url}}">看更多 
+                            <svg class="h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25"><title>Artboard-34</title><g id="Right-2" data-name="Right"><polygon points="17.5 5.999 16.793 6.706 22.086 11.999 1 11.999 1 12.999 22.086 12.999 16.792 18.294 17.499 19.001 24 12.499 17.5 5.999" style="fill:#292929"/></g></svg>
+                        </a>
+                    </div>
+                </div>
+            {{/foreach}}
+        {{/if}}
+    {{/get}}
+    {{/if}}
+</div>

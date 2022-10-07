@@ -1,0 +1,36 @@
+<article class="js-story story-post">
+    <header class="story-post-header mb-5">
+        <h2 class="text-4xl leading-tight text-title mb-5 hover:text-primary"><a href="{{url}}">{{title}}</a></h2>
+        {{!-- Author - Primary Tag - Datetime - Read time - ./partials/components/author-meta.hbs --}}
+        {{> "components/author-meta"}}
+    </header>
+
+    {{#if feature_image}}
+    <figure class="story-post-media relative overflow-hidden rounded-lg shadow-3xl has-overlay h-56">
+        <a href="{{url}}">
+            <img class="story-img inset-image blur-up lazyload"
+                src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                data-srcset="{{img_url feature_image size="xs"}} 100w,
+                    {{img_url feature_image size="s"}} 300w,
+                    {{img_url feature_image size="m"}} 600w,
+                    {{img_url feature_image size="l"}} 1000w"
+                data-sizes="auto"
+                alt="{{title}}"
+                width="630"
+                height="225"
+            />
+            <span class="story-post-overlay inset-0 bg-primary absolute flex items-center justify-center overlay-toggle">
+                <svg class="icon h-10 w-10 text-white"><use xlink:href="#icon-arrow"></use></svg>
+            </span>
+        </a>
+    </figure>
+    {{/if}}
+
+    <div class="story-post-body">
+        <div class="post-body text-xl mb-5"><p>{{excerpt}}</p></div>
+        <a href="{{url}}" class="link is-hover font-medium">
+            {{t "Read more"}}
+            <svg class="icon is-medium"><use xlink:href="#icon-arrow"></use></svg>
+        </a>
+    </div>
+</article>

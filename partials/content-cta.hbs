@@ -1,0 +1,43 @@
+{{{html}}}
+<div class="cta w-full kg-width-full relative z-4"></div>
+{{#has tag="#zh"}}
+<aside class="flex flex-col font-sans g items-center text-base text-center w-full">
+    <div class="bg-gray-100 g-content px-vw4 py-10 rounded-lg shadow-4xl w-full">
+        {{#has visibility="paid"}}
+            <h2 class="text-2xl p-0 m-0 -tracking-wide">{{t "這篇文章僅適用於付費用戶"}}</h2>
+        {{/has}}
+        {{#has visibility="members"}}
+            <h2 class="text-2xl p-0 m-0 -tracking-wide">{{t "這篇文章僅適用於訂閱者"}}</h2>
+        {{/has}}
+        {{#has visibility="tiers"}}
+            <h2 class="text-2xl p-0 m-0 -tracking-wide">{{t "這篇文章只針對{specificTiers}上的訂閱者" specificTiers=(tiers lastSeparator=(t " 和 ") suffix="")}}</h2>
+        {{/has}}
+        {{#if @member}}
+            <a class="button is-primary h-12 mt-8" data-portal="account/plans">{{t "升級您的賬戶"}}</a>
+        {{else}}
+            <a class="button is-primary h-12 mt-8" data-portal="signup">{{t "現在訂閱"}}</a>
+            <p class="mt-8 -tracking-wide">{{t "已經有一個賬戶？"}} <a class="cursor-pointer hover:opacity-80" data-portal="signin">{{t "請登錄"}}</a></p>
+        {{/if}}
+    </div>
+</aside>
+{{else}}
+<aside class="flex flex-col font-sans g items-center text-base text-center w-full">
+    <div class="bg-gray-100 g-content px-vw4 py-10 rounded-lg shadow-4xl w-full">
+        {{#has visibility="paid"}}
+            <h2 class="text-2xl p-0 m-0 -tracking-wide">{{t "This post is for paying subscribers only"}}</h2>
+        {{/has}}
+        {{#has visibility="members"}}
+            <h2 class="text-2xl p-0 m-0 -tracking-wide">{{t "This post is for subscribers only"}}</h2>
+        {{/has}}
+        {{#has visibility="tiers"}}
+            <h2 class="text-2xl p-0 m-0 -tracking-wide">{{t "This post is for subscribers on the {specificTiers} only" specificTiers=(tiers lastSeparator=(t " and ") suffix="")}}</h2>
+        {{/has}}
+        {{#if @member}}
+            <a class="button is-primary h-12 mt-8" data-portal="account/plans">{{t "Upgrade your account"}}</a>
+        {{else}}
+            <a class="button is-primary h-12 mt-8" data-portal="signup">{{t "Subscribe now"}}</a>
+            <p class="mt-8 -tracking-wide">{{t "Already have an account?"}} <a class="cursor-pointer hover:opacity-80" data-portal="signin">{{t "Sign in"}}</a></p>
+        {{/if}}
+    </div>
+</aside>
+{{/has}}

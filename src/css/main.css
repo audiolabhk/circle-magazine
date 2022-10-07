@@ -1,0 +1,204 @@
+
+/* Variables and Root
+/* ---------------------------------------------------------- */
+@import "./abstracts/variables.css";
+@import "./base/root.css";
+
+/* base
+/* ---------------------------------------------------------- */
+
+@import "tailwindcss/base";
+@import "./abstracts/extend.css";
+@import "./base/base.css";
+@import "./base/typography.css";
+@import "./base/global.css";
+
+@import "./abstracts/mixins.css";
+@import "./abstracts/constrols.css";
+
+/* Components
+/* ---------------------------------------------------------- */
+
+@import "tailwindcss/components";
+
+/* Elements
+/* ---------------------------------------------------------- */
+
+@import "./elements/form.css";
+@import "./elements/buttons.css";
+@import "./elements/icon.css";
+@import "./elements/table.css";
+
+/* Components
+/* ---------------------------------------------------------- */
+
+@import "./components/dropdown.css";
+@import "./components/story.css";
+@import "./components/code.css";
+/* @import "./components/modal.css"; */
+
+/* Pages
+/* ---------------------------------------------------------- */
+
+@import "./pages/post.css";
+@import "./pages/kusi-doc-post.css";
+@import "./pages/podcast.css";
+
+/* Cards
+/* ---------------------------------------------------------- */
+
+@import "./cards/cards.css";
+@import "./cards/gallery.css";
+@import "./cards/blockquote.css";
+@import "./cards/bookmark.css";
+
+/* Utilities
+/* ---------------------------------------------------------- */
+
+@import "tailwindcss/utilities";
+
+/* Layout
+/* ---------------------------------------------------------- */
+
+@import "./layout/header.css";
+@import "./layout/sidebar.css";
+@import "./layout/footer.css";
+
+/* Variants
+/* ---------------------------------------------------------- */
+/* @import "tailwindcss/variants"; */
+.slider-wrapper .author img{
+    height: 40px;
+    width: 40px;
+}
+.slider-wrapper{
+    position: relative;
+}
+.navigation{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+}
+.navigation .customNextBtn ,.navigation .customPrevBtn{
+    cursor: pointer;
+}
+.owl-dots{
+    display: none;
+}
+.dark .navigation{
+    background-color: #111;
+}
+.dark .navigation svg polygon{
+    fill: #fff !important;
+}
+.slider-image img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+
+}
+.slider-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.owl-item .slider-image ,.owl-item .slider-content{
+    opacity: 0;
+}
+.owl-item.active .slider-image ,.owl-item.active .slider-content{
+    opacity: 1;
+}
+
+.global-icon svg path {
+    fill: #292929;
+}
+
+.global-icon svg {
+    height: 25px;
+    width: 25px;
+}
+
+.dark .global-icon svg path ,.dark .see-more svg polygon{
+    fill: #fff !important;
+}
+.dark .dark-text-white {
+    color: #dbdbdb;
+}
+
+.lang .dropdown-content {
+    min-width: 75px;
+}
+/* slider style */
+.slider-wrapper{
+    height: 26rem;
+    max-height: 100%;
+    overflow: hidden;
+}
+@media only screen and (min-width: 1000px) {
+    .slider-wrapper .owl-stage-outer ,.slider-wrapper .owl-stage-outer .owl-stage,.slider-wrapper .owl-stage-outer .owl-item{
+        height: 100% !important;
+    }
+}
+@media only screen and (max-width: 999px)  {
+    .slider-wrapper{
+        height: unset;
+        max-height: 100%;
+        overflow: hidden;
+    }
+    
+}
+@media only screen and (max-width: 999px)  {
+    .owl-dots {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        grid-gap: 10px;
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        width: 100%;
+        height: 30px;
+        z-index: 2;
+    }
+    .owl-dot{
+        height: 8px;
+        width: 8px;
+        background-color:#575757 !important;
+        border-radius: 50%;
+    }
+    .dark .owl-dot{
+        height: 8px;
+        width: 8px;
+        background-color:#bebebe !important;
+        border-radius: 50%;
+    }
+    .owl-dot.active{
+        background-color:var(--ghost-accent-color) !important;
+    }
+    
+}
+@media only screen and (max-width: 575px)  {
+    .slider-content{
+        text-align: center;
+        padding-bottom: 45px !important;
+    }
+    .slider-content .author {
+        justify-content: center;
+    }
+    .custom-story-body {
+        text-align: center;
+    }
+    .custom-story-body .hh-date{
+        justify-content: center;
+    }
+    
+}
+
+.border-color-top{
+    border-top: 1px solid #ededed;
+}
+.dark .border-color-top{
+    border-top: 1px solid #575757;
+}

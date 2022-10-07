@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!--
+    Design by:
+    ——————————
+        GODO FREDO
+        ✉ https://godofredo.ninja
+        ✎ @GodoFredoNinja
+        ✈ Lima - Perú
+-->
+<html lang="{{@site.locale}}"{{#match @custom.color_scheme "Dark"}} class="dark"{{/match}}>
+<head>
+    {{!-- Document Settings --}}
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    {{!-- Page Meta --}}
+    <title>{{meta_title}}</title>
+
+    {{!-- Mobile Meta --}}
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script>
+    {{#match @custom.color_scheme "Auto"}}
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.querySelector('html').classList.add('dark');
+        } else {
+            document.querySelector('html').classList.remove('dark');
+        }
+    {{else}}
+        if (localStorage.theme === 'dark') {
+            document.querySelector('html').classList.add('dark');
+        } else if (localStorage.theme === 'light') {
+            document.querySelector('html').classList.remove('dark');
+        }
+    {{/match}}
+    </script>
+
+    {{!-- Fonts -> Inter=400,500,600,700 PT Serift=400,700 --}}
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
+    <noscript><link rel="preconnect" href="https://fonts.gstatic.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"></noscript>
+    {{!-- <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"> --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
+    {{!-- Styles --}}
+    <link rel="stylesheet" type="text/css" href="{{asset "styles/main.css"}}"/>
+    {{!-- <style>{{> "main-styles"}}</style> --}}
+
+    {{!-- Ghost outputs important style and meta data with this tag --}}
+    {{ghost_head}}
+
+    {{!-- Block for Headers --}}
+    {{{block "header"}}}
+</head>
+<body class="{{block "special_body_class"}}">
+    <div class="simply-viewport flex flex-col justify-start">
+        {{!-- Header Content with User Account ./partials/layout/header-user-account.hbs --}}
+        {{#match @custom.header "Default"}}
+        {{> "layout/header"}}
+        {{/match}}
+
+        {{!-- Header With Drop Down --}}
+        {{#match @custom.header "Drop Down Menu"}}{{> "layout/header" hasDropDown=true}}{{/match}}
+
+        {{!-- All the main content gets inserted here, index.hbs, post.hbs, etc --}}
+        <main class="simply-main relative min-h-lg">{{{body}}}</main>
+
+        {{!-- Footer Default ./partials/layout/footer.hbs --}}
+        {{#match @custom.footer "Default"}}{{>"layout/footer"}}{{/match}}
+
+        {{!-- Footer - Dark ./partials/layout/footer-dark.hbs --}}
+        {{#match @custom.footer "Dark"}}{{>"layout/footer-dark"}}{{/match}}
+
+        {{!-- Footer Not Menu ./partials/layout/footer-not-menu.hbs --}}
+        {{#match @custom.footer "No Secondary Navigation"}}{{>"layout/footer-not-menu"}}{{/match}}
+    </div>
+
+    {{!-- Loandig Bar --}}
+    <div class="loadingBar top-0 fixed right-0 left-0 hidden"></div>
+
+    {{!-- Icons --}}
+    {{> "icons/icons-symbol-defs"}}
+
+    {{!-- Scripts URL --}}
+    <script>
+        var prismJs = '{{asset "scripts/prismjs.js"}}';
+        var prismJsComponents = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/components/';
+    </script>
+
+    {{!-- Ghost outputs important scripts and data with this tag --}}
+    {{ghost_foot}}
+
+    {{!-- script --}}
+    {{{block "scripts"}}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    {{!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.js"></script> --}}
+    
+    {{!-- Main scripts --}}
+    <script src="{{#is "post, page"}}{{asset "scripts/post.js"}}{{else}}{{asset "scripts/main.js"}} {{/is}}"></script>
+
+    {{!-- Pagination Infinite Scroll --}}
+    {{#if pagination.next}}<script src="{{asset "scripts/pagination.js"}}" defer async></script>{{/if}}
+</body>
+</html>

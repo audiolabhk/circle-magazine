@@ -1,0 +1,30 @@
+<article class="homeHero-largeCard flex-auto mb-8 md:mb-0 md:pr-6 md:w-3/6 lg:w-full">
+    <a href="{{url}}" class="hhp-image">
+        <div class="hhp-img mb-4 relative h-40">
+            {{#if feature_image}}
+            <img class="inset-image"
+                src="{{img_url feature_image size="s"}}"
+                srcset="{{img_url feature_image size="s"}} 300w,{{img_url feature_image size="m"}} 600w"
+                alt="{{title}}"
+                width="464"
+                height="160"
+            />
+            {{/if}}
+        </div>
+    </a>
+
+    <div class="hhp-body mb-4">
+        <h1 class="hhp-title text-2xl text-title mb-3 line-clamp-2">
+            <a href="{{url}}" class="block">{{title}}</a>
+        </h1>
+
+        {{#if excerpt}}
+        <div class="hhp-excerpt text-lg leading-snug line-clamp-3 mb-3 text-gray-500">
+            <a href="{{url}}">{{excerpt words="30"}}</a>
+        </div>
+        {{/if}}
+
+        {{!-- Author - Primary Tag - Datetime - Read time - ./partials/components/author-meta.hbs --}}
+        {{> "components/author-meta" hide_avatar=true}}
+    </div>
+</article>

@@ -1,0 +1,115 @@
+<div class="nav-mob fixed inset-0 pt-16 header-bg h-screen z-10 w-full text-center overflow-y-auto lg:hidden">
+    <div class="nav-mob-wrap absolute inset-0 top-16 pt-5 flex flex-col">
+        
+        <div class="acc-option-zh">
+            {{#if @site.members_enabled}}{{#unless @member}}
+            <div class="py-4 flex justify-center md:hidden">
+                <a data-portal="signin" class="button mr-2 is-black text-sm font-medium" href="#">{{t "登錄"}}</a>
+                <a data-portal="account/plans" class="button is-primary text-sm font-medium" href="#">{{t "訂閱"}}</a>
+            </div>
+            {{/unless}}{{/if}}
+        </div>
+
+        <div class="acc-option-en">
+            {{#if @site.members_enabled}}{{#unless @member}}
+            <div class="py-4 flex justify-center md:hidden">
+                <a data-portal="signin" class="button mr-2 is-black text-sm font-medium" href="#">{{t "Log in"}}</a>
+                <a data-portal="account/plans" class="button is-primary text-sm font-medium" href="#">{{t "Subscribe"}}</a>
+            </div>
+            {{/unless}}{{/if}}
+        </div>
+
+        {{!-- Light and Dark Mode --}}
+        {{!-- <div class="py-4 justify-center md:hidden">
+            <a role="button" class="js-dark-mode button is-white" aria-label="Dark and Light Mode">
+                <svg class="icon icon--moon m-0" style="margin-right:calc(-0.5em - 1px)"><use xlink:href="#icon-moon"></use></svg>
+                <svg class="icon icon--sunny m-0 hidden" style="margin-left:calc(-0.5em - 1px)"><use xlink:href="#icon-sunny"></use></svg>
+            </a>
+        </div> --}}
+        <div class="mobile-nav-en">
+            {{!-- Navigation for Mobile --}}
+            {{#if @site.navigation}}
+                <div class="py-4 flex-auto">
+                    {{navigation navigationMobile=true}}
+                </div>
+            {{/if}}
+        </div>
+
+        <div class="mobile-nav-zh">
+            {{!-- Navigation for Mobile --}}
+            {{#if @site.secondary_navigation}}
+                <div class="py-4 flex-auto">
+                    {{navigation type="secondary" navigationMobile=true}}
+                </div>
+            {{/if}}
+        </div>
+        {{!-- Social Media - partilas/widget/social-media.hbs --}}
+        {{> "widget/social-media" class="nav-mob-social-media social-media is-inline py-4"}}
+    </div>
+</div>
+
+<script>
+    var windowUrl = window.location.pathname;
+    var windowUrl = windowUrl.split('/')[1];
+    if(windowUrl === 'zh'){
+    localStorage.setItem("lang", windowUrl);
+    }else{
+        localStorage.setItem("lang", "en");
+    }
+
+    var windowTagUrl = window.location.pathname.split('/');
+    
+    var	windowTagUrl2 = windowTagUrl[1];
+    if(windowTagUrl2 == 'tag'){
+      windowTagUrl2 = windowTagUrl[2].split('-')[0];
+    }
+
+     if(windowTagUrl2 === 'zh'){
+      localStorage.setItem("lang", windowTagUrl2);
+    }else{
+      localStorage.setItem("lang", "en");
+    }
+
+
+    if(localStorage.getItem('lang') == 'en'){
+    
+    var mobileNavEn = document.querySelector('.mobile-nav-en');
+        mobileNavEn.style.display = "block";
+    var mobileNavZh = document.querySelector('.mobile-nav-zh');
+        mobileNavZh.style.display = "none";
+        document.querySelector(".tag-acc-option-zh").style.display = "none";
+    }else{
+    var mobileNavEn = document.querySelector('.mobile-nav-en');
+        mobileNavEn.style.display = "none";
+    var mobileNavZh = document.querySelector('.mobile-nav-zh');
+        mobileNavZh.style.display = "block";
+        document.querySelector(".acc-option-en").style.display = "none";
+        document.querySelector(".tag-acc-option-en").style.display = "none";
+        
+    }
+
+    if(localStorage.getItem('lang') == 'en'){
+    
+    var NavEn = document.querySelector('.nav-en');
+        NavEn.style.display = "block";
+    var NavZh = document.querySelector('.nav-zh');
+        NavZh.style.display = "none";
+
+        document.querySelector(".acc-option-zh").style.display = "none";
+    }else{
+    var NavEn = document.querySelector('.nav-en');
+        NavEn.style.display = "none";
+        document.querySelector(".acc-option-en").style.display = "none";
+    }
+
+    if(localStorage.getItem('lang') == 'en'){
+    
+    var NavLogoEn = document.querySelector('.nav-logo-en');
+        NavLogoEn.style.display = "block";
+    var NavLogoZh = document.querySelector('.nav-logo-zh');
+        NavLogoZh.style.display = "none";
+    }else{
+    var NavLogoEn = document.querySelector('.nav-logo-en');
+        NavLogoEn.style.display = "none";
+    }
+</script>

@@ -1,0 +1,35 @@
+{{!-- Layout --}}
+
+
+{{#post}}
+{{#has tag="#zh"}}
+{{!< default-zh}}
+{{else}}
+{{!< default}}
+{{/has}}
+
+{{!-- Class for <body> --}}
+{{#contentFor "special_body_class"}}is-article{{/contentFor}}
+
+<article class="post py-vmin8 relative">
+    <header class="post-header godo-canvas">
+        {{!-- [Title, Excerpt, Author, DateTime, Share]- partials/article/article-header.hbs --}}
+        {{> "article/article-header"}}
+
+        {{!-- Post Image - partials/article/article-featured-image.hbs --}}
+        {{#if feature_image}}{{> "article/article-featured-image" image=feature_image class="block mt-12"}}{{/if}}
+    </header>
+
+    {{!-- Article Body - partials/article/article-body.hbs --}}
+    {{> "article/article-body"}}
+</article>
+
+{{!-- 6 Related Articles - partials/article/article-related.hbs --}}
+{{#has tag="#zh"}}
+{{> "article/article-related-zh"}}
+{{else}}
+{{> "article/article-related"}}
+{{/has}}
+{{/post}}
+{{!-- Post Commets - partials/article/article-comments.hbd --}}
+{{#post}}{{> "article/article-comments"}}{{/post}}

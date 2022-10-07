@@ -1,0 +1,69 @@
+{{!-- Layout --}}
+{{!< default}}
+
+{{!-- Class for <body> --}}
+{{#contentFor "special_body_class"}}is-doc is-canvas-full{{/contentFor}}
+
+{{#post}}
+
+<div class="kusi-doc max-w-extreme mx-auto px-4 relative grid gap-2 md:grid-cols-kusi2 lg:grid-cols-kusi3">
+    {{!-- Navigating the documentation --}}
+    <nav class="sidebar sticky top-16 py-vmin8 overflow-auto hidden scroll-transparent md:block lg:max-h-(screen-16)">
+        <div class="uppercase font-medium text-sm mb-3 px-2">{{t "Getting Started"}}</div>
+
+        <ul itemscope itemtype="http://www.schema.org/SiteNavigationElement" role="menu" class="leading-tight text-base">
+            {{#get "posts" filter="tags:{{tags.[0].slug}}" limit="all" order="published_at asc"}}
+            {{!-- {{#get "posts" filter="tags:{{primary_tag.slug}}" limit="all" order="published_at asc"}} --}}
+            {{#foreach posts}}
+                <li itemprop="name" role="menuitem" >
+                    {{#link
+                        href=(url absolute="true")
+                        class="p-2 text-gray-500 hover:text-primary block"
+                        activeClass="text-primary font-medium"
+                        itemprop="url"}}
+                        {{title}}
+                    {{/link}}
+                </li>
+            {{/foreach}}
+            {{/get}}
+        </ul>
+    </nav>
+
+    {{!-- content of the documentation --}}
+    <article class="max-w-3xl mx-auto py-vmin8 md:px-4">
+        <section class="post-body godo-canvas pt-0 font-sans has-sidebar text-base js-kusi-doc">
+            <h1 id="{{slug}}" class="text-title">{{title}}</h1>
+            {{#if custom_excerpt}}
+            <p class="post-excerpt text-xl text-gray-500">{{custom_excerpt}}</p>
+            <hr>
+            {{/if}}
+            {{content}}
+
+            {{!-- Button to edit on GitHub - add link on Facebook description --}}
+            {{#if og_description}}
+            <p class="mt-10">
+                <a class="edit-on-github godo-tracking button"
+                    href="{{og_description}}"
+                    data-event-category="Kusi Doc"
+                    data-event-action="{{tags.[0].name}}"
+                    data-event-label="{{title}}"
+                    data-event-non-interaction="true">
+                    <svg class="icon mr-2"><use xlink:href="#icon-github"></use></svg>
+                    <span>Edit this page on GitHub</span>
+                </a>
+            </p>
+            {{/if}}
+        </section>
+
+    </article>
+
+    {{!-- Table of Contents --}}
+    <aside class="js-sidebar-right hidden py-vmin8 sticky top-16 overflow-auto scroll-transparent lg:max-h-(screen-16)">
+        <div class="uppercase font-medium text-sm mb-3">{{t "On this page"}}</div>
+        <ul class="text-sm js-table-content leading-tight text-gray-500"></ul>
+    </aside>
+</div>
+
+{{/post}}
+
+{{#contentFor "scripts"}}<script src="{{asset "scripts/kusi-doc-post.js"}}"></script>{{/contentFor}}

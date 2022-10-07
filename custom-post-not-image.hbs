@@ -1,0 +1,25 @@
+{{!-- Layout --}}
+{{!< default}}
+
+{{#post}}
+
+{{!-- Class for <body> --}}
+{{#contentFor "special_body_class"}}is-article{{/contentFor}}
+
+<article class="post py-vmin8 relative">
+    <header class="post-header godo-canvas">
+        {{!-- [Title, Excerpt, Author, DateTime, Share]- partials/article/article-header.hbs --}}
+        {{> "article/article-header"}}
+    </header>
+
+    {{!-- Article Body - partials/article/article-body.hbs --}}
+    {{> "article/article-body"}}
+</article>
+
+{{/post}}
+
+{{!-- 6 Related Articles - partials/article/article-related.hbs --}}
+{{> "article/article-related"}}
+
+{{!-- Post Commets - partials/article/article-comments.hbd --}}
+{{#post}}{{> "article/article-comments"}}{{/post}}

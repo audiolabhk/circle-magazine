@@ -1,0 +1,20 @@
+<div class="flex relative godo-tracking {{class}}"
+    data-event-category="Article"
+    data-event-action="{{#if storyTitle}}{{storyTitle}}{{/if}}"
+    data-event-label="{{url absolute="true"}}"
+    data-event-non-interaction="true">
+
+    {{#if feature_image}}
+    <a href="{{url}}" class="prev-next-image-link relative w-4/12 bg-gray-200 flex-none border border-gray-100" aria-label="{{title}}">
+        <img class="rounded inset-image blur-up lazyload"
+            src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+            data-src="{{img_url feature_image size="s"}}" alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"/>
+    </a>
+    {{/if}}
+
+    <a href="{{url}}" class="prev-next-body pl-6 flex-auto{{#unless feature_image}} p-6 bg-blank rounded shadow-4xl transition-all hover:shadow-card-primary{{/unless}}">
+        <div class="text-sm leading-none text-gray-500 mb-3 font-medium">{{#if storyTitle}}{{storyTitle}}{{/if}}</div>
+        <h2 class="prev-next-title text-title mb-3 text-xl md:text-22 line-clamp-2">{{title}}</h2>
+        <p class="prev-next-excerpt text-base text-gray-500 line-clamp-2 leading-snug">{{excerpt words="25"}}</p>
+    </a>
+</div>

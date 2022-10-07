@@ -1,0 +1,103 @@
+routes:
+  /signup/: members/signup
+  /signin/: members/signin
+  /account/: members/account
+  /membership/: members/membership
+
+  /zh/:
+    controller: channel
+    filter: 'tag:hash-zh'
+    template: index-zh
+
+  /featured/:
+    controller: channel
+    filter: 'tag:-[hash-portfolio,hash-kusi-doc]'
+    limit: 12
+    template: godo-template-featured
+    # Optional for metada for seo
+    # data: page.home-featured
+
+  /archive/:
+    controller: channel
+    filter: 'tag:-[hash-portfolio,hash-kusi-doc]'
+    limit: all
+    template: godo-archive
+
+  /grid/:
+    controller: channel
+    filter: 'tag:-[hash-portfolio,hash-kusi-doc]'
+    limit: 12
+    template: godo-template-grid
+
+  /sidebar/:
+    controller: channel
+    filter: 'tag:-[hash-portfolio,hash-kusi-doc]'
+    limit: 12
+    template: godo-template-sidebar
+
+  /medium/:
+    controller: channel
+    filter: 'tag:-[hash-portfolio,hash-kusi-doc]'
+    template: godo-template-medium
+    limit: 14
+
+  /featured-slider/:
+    controller: channel
+    filter: 'tag:-[hash-portfolio,hash-kusi-doc]'
+    template: godo-template-featured-slider
+
+  /photographer/:
+    controller: channel
+    filter: 'tag:-[hash-portfolio,hash-kusi-doc]'
+    template: godo-template-photographer
+    limit: 12
+
+  /personal/:
+    template: godo-home-personal
+    data: page.godo-personal
+
+  /medium-sidebar/:
+    controller: channel
+    template: godo-template-medium-sidebar
+    data:
+      post: page.medium-with-sidebar
+    limit: 14
+
+collections:
+  # zh
+  /zh/:
+    permalink: /zh/{slug}/
+    template: index-zh
+    filter: 'tag:hash-zh'
+
+  # PortFolio
+  /portafolio/:
+    permalink: /portafolio/{slug}/
+    filter: 'tag:[hash-portfolio]'
+    data: page.porftfolio
+    template: godo-template-portfolio
+    limit: all
+
+  # Podcast
+  /podcast/:
+    permalink: /podcast/{slug}/
+    filter: 'tag:[hash-podcast]'
+    data: page.podcast
+    template: godo-podcast
+    limit: 10
+
+  # Documentation
+  /docs/:
+    permalink: /docs/{slug}/
+    filter: 'tag:[hash-kusi-doc]'
+    template: godo-home-kusi-doc
+
+  # Default
+  /:
+    permalink: /{slug}/
+    filter: 'tag:-[hash-portfolio,hash-kusi-doc,hash-podcast]'
+    template: index
+
+taxonomies:
+  tag: /tag/{slug}/
+  author: /author/{slug}/

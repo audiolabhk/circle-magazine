@@ -1,0 +1,69 @@
+{{!-- Layout --}}
+{{!< default}}
+
+{{!-- Class for <body> --}}
+{{#contentFor "special_body_class"}}is-portfolio{{/contentFor}}
+
+{{#page}}
+
+<header class="topic-header">
+    <div class="px-4 py-10 lg:py-vw6 lg:pb-8 mx-auto max-w-3xl text-center">
+        <h1 class="capitalize text-5xl text-title md:text-6xl">{{title}}</h1>
+        {{#if excerpt}} <div class="max-w-lg mt-2 mx-auto text-xl text-gray-500">{{excerpt}}</div>{{/if}}
+    </div>
+</header>
+
+{{#if tags}}
+<ul class="list-inline text-center px-4 mt-4">
+    <li class="js-filter-btn inline-block border-b-2 border-transparent border-primary hover:border-primary cursor-pointer mb-2" data-filter="all">{{t "All"}}</li>
+    {{#foreach tags}}<li class="js-filter-btn inline-block border-b-2 border-transparent hover:border-primary cursor-pointer mb-2 ml-4" data-filter="{{slug}}">{{name}}</li>{{/foreach}}
+</ul>
+{{/if}}
+
+{{/page}}
+
+<div class="site-post py-vmin8 px-4">
+    <div class="mx-auto max-w-1100 feed-entry-wrap grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {{#foreach posts}}
+            {{> "story/story-portfolio"}}
+        {{/foreach}}
+    </div>
+</div>
+
+{{#contentFor "scripts"}}
+<script>
+(function () {
+  var filterBtn = document.querySelectorAll('.js-filter-btn');
+
+  if (!filterBtn.length) return;
+
+  function filterSelection(str) {
+    var allCard = document.querySelectorAll('.js-filter-items');
+
+    if (!allCard.length) return;
+
+    for (var i = 0; i < allCard.length; i++) {
+      var portfolioCard = allCard[i];
+
+      portfolioCard.classList.add('hidden');
+
+      if (portfolioCard.getAttribute('data-id') === str || str === 'all') {
+        portfolioCard.classList.remove('hidden');
+      }
+    }
+  }
+
+  filterBtn.forEach(function (btn) {
+    return btn.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      var current = document.querySelector('.js-filter-btn.border-primary');
+      current.classList.remove('border-primary');
+      this.classList.add('border-primary');
+      var dataFilter = btn.getAttribute('data-filter');
+      filterSelection(dataFilter);
+    });
+  });
+})();
+</script>
+{{/contentFor}}
